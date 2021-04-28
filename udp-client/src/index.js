@@ -6,34 +6,34 @@ const HOST = "127.0.0.1";
 const socket = dgram.createSocket("udp4");
 
 const createFile = (fileName) => new Promise((resolve, reject) =>
-    socket.send(Buffer.from(JSON.stringify({action: "CREATE_FILE", content: fileName})), PORT, HOST, (err) => {
+    socket.send(Buffer.from(JSON.stringify({action: "CREATE_FILE", fileName})), PORT, HOST, (err) => {
         if (err) reject(err);
-        resolve('File should be created');
+        resolve('1. File should be created');
     })
 )
 
-const writeToFile = (msg) => new Promise((resolve, reject) =>
-    socket.send(Buffer.from(JSON.stringify({action: "WRITE_INTO_FILE", content: msg})), PORT, HOST, (err) => {
+const writeToFile = (fileName, msg) => new Promise((resolve, reject) =>
+    socket.send(Buffer.from(JSON.stringify({action: "WRITE_INTO_FILE", fileName, content: msg})), PORT, HOST, (err) => {
         if (err) reject(err);
-        resolve('Content should be saved');
+        resolve('2. Content should be saved');
     })
 )
 
-const deleteFile = () => new Promise((resolve, reject) =>
-    socket.send(Buffer.from(JSON.stringify({action: "DELETE_FILE"})), PORT, HOST, (err) => {
+const deleteFile = (fileName) => new Promise((resolve, reject) =>
+    socket.send(Buffer.from(JSON.stringify({action: "DELETE_FILE", fileName})), PORT, HOST, (err) => {
         if (err) reject(err);
-        resolve('File should be removed');
+        resolve('3. File should be removed');
     })
 )
 
 const startApp = async () => {
-    await createFile("test.txt");
-    await writeToFile("I want to save the message");
+    console.log(await createFile("test.txt"));
+    console.log(await writeToFile("test.txt", "I want to save the message"));
 
     setTimeout(async () => {
-        await deleteFile();
+        console.log(await deleteFile("test.txt"));
         socket.close()
-    },10000)
+    }, 10000)
 }
 
 startApp();
