@@ -23,18 +23,15 @@ socket.on("message", async (msg) => {
     switch (action) {
         case ActionType.createFile:
 
-            queue.addToList(() => fileService.createFile(fileName));
-            console.log('1. Action for file create');
+            queue.addToList(async () => await fileService.createFile(fileName));
             break;
 
         case ActionType.writeIntoFile:
-            queue.addToList(() => fileService.writeToFile(fileName, content));
-            console.log('2. Action for file update');
+            queue.addToList(async() => await fileService.writeToFile(fileName, content));
             break;
 
         case ActionType.deleteFile:
-            queue.addToList(() => fileService.deleteFile(fileName));
-            console.log('3. Action for file delete');
+            queue.addToList(async() => await fileService.deleteFile(fileName));
             break;
 
         default:
