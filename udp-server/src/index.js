@@ -1,6 +1,7 @@
 const dgram = require("dgram");
 const ActionType = require('./types');
 const fileService = require('./services/fileService');
+const queue = require('./models/Queue');
 
 const PORT = 8080;
 const HOST = "127.0.0.1";
@@ -21,17 +22,18 @@ socket.on("message", async (msg) => {
 
     switch (action) {
         case ActionType.createFile:
-            await fileService.createFile(fileName);
+
+            queue.addToList(() => fileService.createFile(fileName));
             console.log('1. Action for file create');
             break;
 
         case ActionType.writeIntoFile:
-            await fileService.writeToFile(fileName, content);
+            queue.addToList(() => fileService.writeToFile(fileName, content));
             console.log('2. Action for file update');
             break;
 
         case ActionType.deleteFile:
-            await fileService.deleteFile(fileName);
+            queue.addToList(() => fileService.deleteFile(fileName));
             console.log('3. Action for file delete');
             break;
 
