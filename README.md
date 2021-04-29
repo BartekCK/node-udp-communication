@@ -6,7 +6,7 @@ I made simple server which listen to datagrams and do actions with file system b
 This example is a `small` antipattern. We shouldn't send a datagram with commands for file system manage (but it depends ...). If we send command for **delete file**, but file not exist, client should get a response with error, but this is not TCP ☺️<br/>So in this kind of problem client/user cannot get information about transaction.
 <br/><br/>
 I created also `UDP client` with Node for show faster way to see result.
-For both app I use 'dgram' and 'fs module in server part.
+For both app I use 'dgram' and 'fs' module in server part.
 
 ## File system server commands
 Server for fs management should get a special data buffer. In this kind I use a JSON.
@@ -44,7 +44,7 @@ npm start
 ```
 
 
-## Execute commands for client (before this step start server)
+## Execute commands for client (start server before this step)
 
 ### With `netcat`
 ![client with netcat](./assets/netcatClient.gif)
