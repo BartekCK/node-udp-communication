@@ -1,6 +1,10 @@
 const dgram = require('dgram');
-const ActionType = require('./types');
+
+// services
 const fileService = require('./services/fileService');
+
+// types
+const ActionType = require('./types');
 
 const PORT = 8080;
 const HOST = '127.0.0.1';
