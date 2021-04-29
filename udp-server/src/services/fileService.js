@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 
 const fileService = {
     createFile: async (fileName) => {
-        const file = await fs.open(fileName, "w");
+        const file = await fs.open(fileName, 'w');
         await file.close();
         console.log('1. Action for file create');
     },
@@ -15,7 +15,7 @@ const fileService = {
     deleteFile: async (fileName) => {
         await fs.unlink(fileName);
         console.log('3. Action for file delete');
-    }
-}
+    },
+};
 
 module.exports = fileService;
