@@ -56,12 +56,12 @@ echo "{\"action\": \"CREATE_FILE\", \"fileName\": \"test.txt\"}" | nc -w1 -u 127
 
 - Update file
 ```bash
-echo "{\"action\": \"WRITE_INTO_FILE\", \"fileName\": \"test.txt\", \"content\": \"ala ma kota\"}" | nc -w1 -u 127.0.0.1 8080`
+echo "{\"action\": \"WRITE_INTO_FILE\", \"fileName\": \"test.txt\", \"content\": \"ala ma kota\"}" | nc -w1 -u 127.0.0.1 8080
 ```
 
 - Delete file
 ```bash
-echo "{\"action\": \"DELETE_FILE\", \"fileName\": \"test.txt\"}" | nc -w1 -u 127.0.0.1 8080`
+echo "{\"action\": \"DELETE_FILE\", \"fileName\": \"test.txt\"}" | nc -w1 -u 127.0.0.1 8080
 ```
 
 
