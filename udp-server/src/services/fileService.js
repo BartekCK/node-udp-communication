@@ -1,12 +1,9 @@
 const fs = require('fs').promises;
 
-const sleep = (time) => new Promise(resolve => setTimeout(() => resolve("Wake up"), time))
-
 const fileService = {
     createFile: async (fileName) => {
         const file = await fs.open(fileName, "w");
         await file.close();
-        await sleep(10000);
         console.log('1. Action for file create');
     },
 
